@@ -11,7 +11,8 @@ import org.springframework.boot.context.embedded.*;
 import org.springframework.context.annotation.*;
 
 /**
- * Spring boot application that defines the routes available for customer services
+ * Spring boot application that defines the routes available for customer
+ * services
  * 
  * @author Michael Hoffman, NVISIA
  *
@@ -41,14 +42,14 @@ public class CustomerRouter extends FatJarRouter {
             // CORS (resource sharing) enablement
             apiProperty("cors", "true").
             // Use localhost for calls
-            apiProperty("host", "localhost:8080").
+            apiProperty("host", "localhost:8081").
             // Set base path
             apiProperty("base.path", "nvisia-customer-camel-service/api");
-      
+
       // Definition of the get customer endpoint
       rest("/customer").
             // This is a GET method call for getting a customer by ID.
-      get("{id}").
+            get("{id}").
             // Description of what this method does
             description("Retrieve a customer by ID").
             // Define the output type that will be returned from this method
