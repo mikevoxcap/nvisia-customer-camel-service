@@ -16,11 +16,10 @@ public class DefaultCustomerService implements CustomerService {
       if (id == 1) {
          return new Customer(1, "Han", "Solo", "888-888-8888");
       } else if (id == 2) {
-         return new Customer(1, "Ben", "Solo", "444-333-8228");
+         return new Customer(2, "Ben", "Solo", "444-333-8228");
       } else {
-         return null; 
+         return null;
       }
    }
-
 
 }
