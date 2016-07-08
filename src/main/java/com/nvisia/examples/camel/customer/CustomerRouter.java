@@ -22,38 +22,45 @@ public class CustomerRouter extends FatJarRouter {
 
    @Override
    public void configure() {
+      initializeRestConfiguration();
+      initializeCustomerRoute();
+   }
+
+   protected void initializeRestConfiguration() {
       // Start by building an instance of RestConfigurationDefinition. Need to
       // specify the component we are going to use for enabling REST endpoints,
       // specifically CamelServlet in this case. Set the binding mode to JSON.
-      restConfiguration().
+      restConfiguration()
             // Leverage the CamelServlet component for the REST DSL
-            component("servlet").
+            .component("servlet")
             // Bind using JSON
-            bindingMode(RestBindingMode.json).
+            .bindingMode(RestBindingMode.json)
             // I like pretty things...
-            dataFormatProperty("prettyPrint", "true").
+            .dataFormatProperty("prettyPrint", "true")
             // This is the context path to be used for Swagger API documentation
-            apiContextPath("api-doc").
+            .apiContextPath("api-doc")
             // Properties for Swagger
             // Title of the API
-      apiProperty("api.title", "NVISIA Customer Service API").
+            .apiProperty("api.title", "NVISIA Customer Service API")
             // Version of the API
-            apiProperty("api.version", "1.0.0").
+            .apiProperty("api.version", "1.0.0")
             // CORS (resource sharing) enablement
-            apiProperty("cors", "true").
+            .apiProperty("cors", "true")
             // Use localhost for calls
-            apiProperty("host", "localhost:8081").
+            .apiProperty("host", "localhost:8081")
             // Set base path
-            apiProperty("base.path", "nvisia-customer-camel-service/api");
+            .apiProperty("base.path", "nvisia-customer-camel-service/api");
+   }
 
+   protected void initializeCustomerRoute() {
       // Definition of the get customer endpoint
-      rest("/customer").
+      rest("/customer")
             // This is a GET method call for getting a customer by ID.
-            get("{id}").
+            .get("{id}")
             // Description of what this method does
-            description("Retrieve a customer by ID").
+            .description("Retrieve a customer by ID")
             // Define the output type that will be returned from this method
-            outType(Customer.class)
+            .outType(Customer.class)
             // Define where the message is routed to as a URI. Here we use a
             // Spring Bean and define the bean method to invoke. Note that Camel
             // has converted the ID placeholder from the URL into a header
